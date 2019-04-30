@@ -1,0 +1,10 @@
+{
+    # app secrets
+    app_secrets => ['app','secrets'],
+
+    # password to to send to PC
+    pc_pass => "pass123\n",
+
+    # password to use this app
+    admin_pass => "password",
+};

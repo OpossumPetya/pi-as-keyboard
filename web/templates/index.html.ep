@@ -1,0 +1,28 @@
+% title 'Dark Secrets';
+% layout 'index-layout';
+
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+
+        % if (!$user->{is_authenticated}) {
+            <form method="post" action="/login">
+              <div class="row">
+                <div class="six columns">
+                    <label for="secret">PSST.. TELL ME A SECRET...</label>
+                    <input class="u-full-width" placeholder="hey, right here" id="secret" name="secret" type="password">
+                </div>
+              </div>
+              <input class="button-primary" value="Submit" type="submit">
+            </form>
+        % } else {
+            <p>Welcome, <%== $user->{name} %></p>
+            <form method="post" action="/sendpass">
+                <input class="button-primary" value="Send Password" type="submit">
+            </form>
+            <p style="font-size:smaller"><a href='/logout'>Logout</a></p>
+        % }
+
+      </div>
+    </div>
+  </div>
