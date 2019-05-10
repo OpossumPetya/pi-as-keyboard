@@ -1,0 +1,17 @@
+AddHandler cgi-script .pl
+Options +ExecCGI
+
+IndexIgnore *
+
+RewriteEngine on
+
+RewriteCond %{DOCUMENT_ROOT}/public/%{REQUEST_URI} -f
+RewriteRule ^(.*)$ public/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+#RewriteCond %{REQUEST_FILENAME} !-d
+    # ^^^ this disables the rule below if the path is a real directory,
+    # but the "root" IS a real directory (at least when this is in subdirectory),
+    # so, instead of serving app, it will show the directory contents
+RewriteRule ^(.*)$ app.pl/$1 [L]

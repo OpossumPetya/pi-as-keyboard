@@ -1,14 +1,28 @@
+#!/usr/bin/perlml
 
 use strict;
 use warnings;
 
 # use CGI::Carp qw(fatalsToBrowser);
 
+use FindBin '$Script';
 use MIME::Base64;
 use Mojolicious::Lite;
 use Mojolicious::Plugin::Authentication;
 use Mojo::Util qw(secure_compare);
 
+
+
+hook before_dispatch => sub {
+    my $self = shift;
+    
+    if (-1 != index $self->req->url->base->to_string, $Script) {
+        my ($base_path) = $self->req->url->base->to_string =~ /^(.*?)$Script/ if 1;
+        $self->req->url->base( Mojo::URL->new( $base_path ) );
+    }
+    
+    # $self->req->url->base( Mojo::URL->new( 'https://domain.com/path/more-path/' ) );
+};
 
 plugin Config => { file => 'app.json' };
 
