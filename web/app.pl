@@ -7,7 +7,8 @@ use warnings;
 use Mojolicious::Lite;
 use Mojolicious::Plugin::Authentication;
 
-use lib 'lib';
+use FindBin;
+use lib "$FindBin::Bin/../lib";    
 use HidReport;
 
 plugin Config => { file => 'app.json' };

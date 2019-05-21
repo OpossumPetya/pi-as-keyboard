@@ -1,0 +1,13 @@
+{
+    # password to "type"
+    "pc_pass": "...",
+
+    # check url -- POST call is made to this URL
+    "url": "...",
+
+    # check every "pause" minutes
+    "pause": 5,
+    
+    # authorization key (an alphanumeric string)
+    "auth_key": "...",
+}

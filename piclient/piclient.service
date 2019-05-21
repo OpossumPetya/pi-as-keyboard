@@ -1,0 +1,13 @@
+[Unit]
+Description=Pi Client
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/perl client.pl
+WorkingDirectory=/home/pi/piclient
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
