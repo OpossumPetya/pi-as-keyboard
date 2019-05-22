@@ -1,6 +1,6 @@
 {
-    # password to "type"
-    "pc_pass": "...",
+    # password to enter; end with "\n" to send the Enter key input
+    "pc_pass": "password\n",
 
     # check url -- POST call is made to this URL
     "url": "...",
