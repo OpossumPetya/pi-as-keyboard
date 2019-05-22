@@ -29,7 +29,8 @@ A "programmable keyboard" physically connected to that remote PC, which is also 
         
 ## Software Setup
 
-**Option (A): Client script is running on Raspberry Pi**, checking an external webservice for a "flag" as a signal to enter the password.
+### Option (A): 
+**Client script is running on Raspberry Pi**, checking an external webservice for a "flag" as a signal to enter the password.
 
 This solution consists of two parts: a client on Raspberry Pi running as daemon, periodically checking the external resource for a flag, and an external web service, which would provide such flag (can be running on a shared hosting account, or a inexpensive VPS account. a third party JSON storage/"bin" service can alrernatively be used too).
 
@@ -39,15 +40,15 @@ __*Client script:*__
 - Edit the `config.json` (more on URL below)
 - You can delete `clientd.pl` and `controller.sh` files -- they were created to daemonize the client script, but we'll use `systemd` for that.
 
-*For security reasons the client script will only poll for a flag using POST calls. It will also pass Authentication header.*
+*For security reasons the client script will only poll for a flag using POST requests. It will also pass Authentication header.*
 
 Using `systemd` to run the script as daemon:
 
-- Copy `piclient.service` file into `/etc/systemd/system` as root, for example:
+- Copy `piclient.service` file into `/etc/systemd/system` as root:
 
 `sudo cp piclient.service /etc/systemd/system/piclient.service`
 
-Note, the "`User=`" directive is not specified in the `.service` file -- this will make it run under `root` user, which is required to "perform key presses".
+Note, the "`User=`" directive is not specified in the `.service` file -- this will make the script run under `root` user account, which is required to "perform key presses".
 
 Now you can manually start/stop the service as follows:
 
@@ -65,7 +66,7 @@ sudo systemctl disbalbe piclient.service
 
 __*A Flag:*__
 
-A "flag" url is any url that can return `{ "flag": 1 }` to a POST call (`1` = go ahead, enter enter the pass; `0` = do nothing).
+A "flag" url is any url that can return `{ "flag": 1 }` to a POST request (`1` = go ahead, enter enter the pass; `0` = do nothing).
 
 __*Flag Management via included app:*__
 
@@ -77,10 +78,10 @@ To run on shared hosting:
 - Change permissions for `piui/app.pl` to 755
 - Edit the `piui/app.json` file: make sure the `auth_key` parameter is the same in this app and the client script above
 - In your CPanel admin got to Perl Modules section
-    - "Using Your Perl Module" will list the shabang that must be used in the script: if it's different then in the `piui/app.pl` - replace it.
+    - "Using Your Perl Module" will list the shabang that must be used in the script: if it's different than in the `piui/app.pl` - replace it.
     - Install `Mojolicious` and `Mojolicious::Plugin::Authentication` modules.
     
-This now should be accessible directly via https://yourdoamin.com/path/piui url. Once you confirm app opens, you can login, and toggle the flag, add `https://yourdoamin.com/path/piui/processflag` URL to the client script config (`url` key).
+This app now should be accessible directly via https://yourdoamin.com/path/piui url. Once you confirm login screen is displayed, you're able to login and toggle the flag, add `https://yourdoamin.com/path/piui/processflag` URL to the client script config (`url` key).
 
 __*Flag Management via third party JSON bin/mock service:*__
 
@@ -90,7 +91,8 @@ Out of 7-8 services I tried only beeceptor.com met these criteria... Except for 
 
 
 
-**Option (B): Web server running on the Raspberry Pi**, and can be configured to be accessed from outsite network.
+### Option (B): 
+**Web server running on the Raspberry Pi**, and can be configured to be accessed from outsite network.
 
 *This was the original idea, but it may not be suitable for everyone due to your network provider's security policies.*
 
@@ -98,6 +100,6 @@ Out of 7-8 services I tried only beeceptor.com met these criteria... Except for 
 2. Configure the web server to be accessible from outside of local network ( good luck! :-) )
 
 
-### Links
+## Links
 * [How To Setup Raspberry Pi Zero W Headless WiFi](https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html)
 * [Turn Your Raspberry Pi Zero into a USB Keyboard (HID)](https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/)
