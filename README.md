@@ -32,7 +32,7 @@ A "programmable keyboard" physically connected to that remote PC, which is also 
 ### Option (A): 
 **Client script is running on Raspberry Pi**, checking an external webservice for a "flag" as a signal to enter the password.
 
-This solution consists of two parts: a client on Raspberry Pi running as daemon, periodically checking the external resource for a flag, and an external web service, which would provide such flag (can be running on a shared hosting account, or a inexpensive VPS account. a third party JSON storage/"bin" service can alrernatively be used too).
+This solution consists of two parts: a client on Raspberry Pi running as daemon, periodically checking the external resource for a flag, and an external web service, which would provide such flag (self-hosted app running on a shared hosting account, or a inexpensive VPS account. A third party JSON storage/bin/mock service can alrernatively be used too).
 
 __*Client script:*__
 
